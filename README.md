@@ -54,3 +54,5 @@ The user interface does not poll the backend engine. Instead, it signs a contrac
 ```
 concreteService.OnThreatDetected += Service_OnThreatDetected;
 ```
+
+230543001
