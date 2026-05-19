@@ -28,12 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            btnStartScan = new Button();
+            btnStopScan = new Button();
+            lblStatus = new Label();
+            lstThreats = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            SuspendLayout();
+            // 
+            // btnStartScan
+            // 
+            btnStartScan.Location = new Point(12, 316);
+            btnStartScan.Name = "btnStartScan";
+            btnStartScan.Size = new Size(94, 29);
+            btnStartScan.TabIndex = 0;
+            btnStartScan.Text = "Start Scan";
+            btnStartScan.UseVisualStyleBackColor = true;
+            btnStartScan.Click += btnStartScan_Click;
+            // 
+            // btnStopScan
+            // 
+            btnStopScan.Location = new Point(12, 351);
+            btnStopScan.Name = "btnStopScan";
+            btnStopScan.Size = new Size(94, 29);
+            btnStopScan.TabIndex = 1;
+            btnStopScan.Text = "Stop Scan";
+            btnStopScan.UseVisualStyleBackColor = true;
+            btnStopScan.Click += btnStopScan_Click;
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(12, 394);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(97, 20);
+            lblStatus.TabIndex = 2;
+            lblStatus.Text = "Status: Ready";
+            //lblStatus.Click += label1_Click;
+            // 
+            // lstThreats
+            // 
+            lstThreats.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2 });
+            lstThreats.Location = new Point(12, 27);
+            lstThreats.Name = "lstThreats";
+            lstThreats.Size = new Size(556, 269);
+            lstThreats.TabIndex = 3;
+            lstThreats.UseCompatibleStateImageBehavior = false;
+            lstThreats.View = View.Details;
+            //lstThreats.SelectedIndexChanged += lstThreats_SelectedIndexChanged;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Threat Name";
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Registry Path";
+            columnHeader2.TextAlign = HorizontalAlignment.Right;
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(lstThreats);
+            Controls.Add(lblStatus);
+            Controls.Add(btnStopScan);
+            Controls.Add(btnStartScan);
+            Name = "MainForm";
+            Text = "Form1";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button btnStartScan;
+        private Button btnStopScan;
+        private Label lblStatus;
+        private ListView lstThreats;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
     }
 }
