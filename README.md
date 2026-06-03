@@ -1,58 +1,72 @@
-# virusAApp - Object-Oriented AntiVirus & Registry Scanner
+# 🛡️ virusAApp (Desktop AntiVirus & Registry Scanner)
 
-A professional, decoupled desktop application developed in C# and .NET 8.0 Windows Forms that simulates malware registry detection and remediation processes. This project was engineered specifically to showcase advanced Object-Oriented Programming (OOP) architectures, clean code conventions, and multi-threaded event-driven engineering.
-
-## 🚀 Key Architectural Features & OOP Concepts
-
-- **Separation of Concerns (SoC):** The codebase is rigidly partitioned into standalone conceptual layers (`Interfaces`, `Models`, `Services`, `UI`) ensuring zero spaghetti pattern violations.
-- **Strict Abstraction:** User Interface layers depend strictly on abstract contracts (`IAntiVirusService`) rather than concrete business models, implementing the *Dependency Inversion Principle (SOLID)*.
-- **Event-Driven UI Notification:** Avoids anti-patterns of tight coupling by subscribing to custom `Action` event streams (`OnThreatDetected`, `OnScanStatusChanged`) pushed by asynchronous engine background tasks.
-- **Asynchronous Processing & Thread Safety:** Heavy threat simulation scanning actions utilize non-blocking `Task.Run` worker threads combined with `Control.BeginInvoke` to safely dispatch updates back to the UI state thread.
+This project was developed as part of the **Object-Oriented Programming (OOP)** course at **Fırat University, Software Engineering Department**. The application is an advanced desktop security and anti-malware simulation platform featuring behavioral analysis of Windows Registry vulnerabilities, driven by a decoupled asynchronous backend.
 
 ---
 
-## 📂 Project Directory Breakdown
+## 🎓 Student Information
+
+* **Name & Surname:** Esra Gürbüz
+* **Student ID:** 230543001
+* **University:** Fırat University
+* **Department:** Software Engineering (Sophomore / 2nd Year)
+
+---
+
+## 🚀 Architectural & OOP Highlights
+
+This application avoids "Spaghetti Code" by segregating components into decoupled, dedicated architectural layers following production-ready engineering standards:
+
+* **Abstraction & Interfaces (`IAntiVirusService`):** Core threat detection pipelines, termination actions, and system logs are completely abstracted through interfaces. This enforces a strict structural contract, allowing the underlying malware detection engine to be swapped seamlessly without impacting other layers.
+* **Dependency Inversion (Loose Coupling):** The presentation layer (`MainForm`) relies exclusively on the `IAntiVirusService` abstraction rather than concrete implementations, successfully preventing rigid, tight class cross-dependencies.
+* **Event-Driven Programming:** Avoids the anti-pattern of tight UI coupling by subscribing to custom `Action` event streams (`OnThreatDetected`, `OnScanStatusChanged`). The UI layer operates entirely on an asynchronous event-driven model, natively capturing scanner pulses via specialized WinForms Event Handlers.
+* **Asynchronous Execution & Thread-Safety:** Heavy threat analysis routines push processing components to background pipelines. To preserve a smooth user experience and prevent window freezing, operation orchestration is offloaded using `Task.Run` worker threads combined with `Control.BeginInvoke` to safely marshal updates back to the UI thread.
+* **Robust Data Encapsulation:** Implemented strongly-typed metadata structures (`VirusThreat`) and status mappings (`ThreatSeverity` enum), eliminating runtime data uyuşmazlığı and magic-string vulnerabilities during threat logs sorting.
+
+---
+
+## 📁 Directory Structure
+
+The solution is divided into four distinct modules to achieve a clear separation of concerns (SoC):
 
 ```text
 virusAApp/
 │
-├── Interfaces/
-│   └── IAntiVirusService.cs       # Formal behavioral contract for scanning components
-│
-├── Models/
-│   ├── VirusThreat.cs             # Encapsulated state and properties of a security hazard
-│   └── ThreatSeverity.cs          # Strongly-typed enum mapping risk indices
-│
-├── Services/
-│   └── AntiVirusService.cs        # Concrete business engine executing async registry simulators
-│
-└── UI/
-    ├── MainForm.cs                # Form controller displaying localized grid metrics
-    └── MainForm.Designer.cs       # Auto-generated programmatic UI engine settings
+├── virusAApp/
+│   ├── Interfaces/        # Service contracts, abstract business pipelines, and API boundaries
+│   │   └── IAntiVirusService.cs
+│   │
+│   ├── Models/            # Domain Data Transfer Objects (DTO) and strict system metadata schemas
+│   │   ├── VirusThreat.cs   # Encapsulates registry paths, hazard classifications, and threat records
+│   │   └── ThreatSeverity.cs # Strongly-typed enum mapping vulnerability risk indices
+│   │
+│   ├── Services/          # Concrete business logic, asynchronous simulation pipelines, and triggers
+│   │   └── AntiVirusService.cs
+│   │
+│   └── UI/                # Presentation layer forms, structural state layouts, and code-behind
+│       ├── MainForm.cs
+│       ├── MainForm.Designer.cs
+│       └── Program.cs     # Application bootstrapper and main engine entry point
 ```
+## 🛠️ Tech Stack & Dependencies
 
-## 🛠️ Technology Stack & Dependencies
-- **Framework:** .NET 8.0 (Long-Term Support)
-- **GUI Engine:** Windows Forms App (.NET Desktop Workload)
-- **Language:** C# 12
-- **Version Control:** Git & Professional Conventional Commit Standards
+* **Language:** C#
+* **Framework:** .NET 8.0 Ecosystem (Long-Term Support)
+* **User Interface:** Windows Forms (WinForms)
+* **Design Patterns:** Event-Driven Architecture, Separation of Concerns (SoC)
 
-## ⚡ Technical Concept Highlights (For Reviewers)
+---
 
-**1. Thread-Safe Invocation**
-Because the threat hunting pipeline runs off-thread, attempting to write directly to the interface's ListView would throw cross-thread violations. This architecture enforces safe marshaling:
-```
-if (this.InvokeRequired)
-{
-    this.BeginInvoke(new Action(() => Service_OnThreatDetected(threat)));
-    return;
-}
-// UI manipulations happen safely below
-```
-**2. Event-Driven Decoupling**
-The user interface does not poll the backend engine. Instead, it signs a contract to listen for triggers:
-```
-concreteService.OnThreatDetected += Service_OnThreatDetected;
-```
+## 🔧 Installation & Setup
 
-230543001
+1. Clone this repository to your local machine:
+   ```bash
+   git clone [https://github.com/your-username/virusAApp.git](https://github.com/your-username/virusAApp.git)
+   ```
+2. Open the `virusAApp.sln` solution file in **Visual Studio**.
+3. Ensure that the target framework is recognized as **.NET 8.0**.
+4. Build the solution using `Ctrl + Shift + B` to verify that all solution assemblies and namespace files are linked properly.
+5. Press `F5` or click the green **Start** button to launch the anti-malware desktop simulation panel.
+
+---
+*Developed for educational purposes as a technical OOP portfolio milestone.*
